@@ -50,26 +50,38 @@ without any manual work.
 
 ## Project structure
 
-flight-delay-pipeline/
-├── ingest.py                    # pulls raw data into S3
-├── transform.py                 # cleans and transforms the data
-├── quality_checks.py            # runs 20 data quality checks across 6 categories
+```
+flight-delay-intelligence/
+│
+├── ingest.py                        # pulls raw BTS data into S3
+├── transform.py                     # cleans, deduplicates, transforms data
+├── quality_checks.py                # 20 automated data quality checks
+├── requirements.txt                 # python dependencies
+├── .env.example                     # template for AWS credentials
+│
 ├── glue_jobs/
-│   └── glue_etl.py              # PySpark version of the ETL for AWS Glue
+│   └── glue_etl.py                  # PySpark ETL job for AWS Glue
+│
 ├── dbt/
 │   └── flight_delays/
 │       └── models/
-│           ├── staging/         # stg_flights.sql — raw data cleaned up
-│           ├── facts/           # fct_delays.sql — one row per flight with business logic
-│           └── marts/           # mart_airline_summary, mart_airport_summary
+│           ├── staging/
+│           │   └── stg_flights.sql  # raw data cleaned up
+│           ├── facts/
+│           │   └── fct_delays.sql   # one row per flight, business logic
+│           └── marts/
+│               ├── mart_airline_summary.sql
+│               └── mart_airport_summary.sql
+│
 ├── streamlit_app/
-│   └── app.py                   # interactive dashboard
+│   └── app.py                       # interactive dashboard
+│
 ├── .streamlit/
-│   └── config.toml              # dashboard theme config
-├── .github/
-│   └── workflows/
-│       └── pipeline.yml         # automated weekly pipeline run
-└── requirements.txt
+│   └── config.toml                  # navy blue dashboard theme
+│
+└── .github/
+    └── workflows/
+        └── pipeline.yml             # automated weekly run via GitHub Actions
 
 ---
 
