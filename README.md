@@ -19,8 +19,7 @@ Raw flight data from the BTS website goes through a full pipeline:
 - dbt models build three analytical layers on top of Athena — staging, facts, and aggregated marts
 - Streamlit dashboard surfaces the insights
 
-The whole thing runs automatically every Monday via GitHub Actions, pulling fresh BTS data 
-without any manual work.
+The pipeline is automated via GitHub Actions and designed to run on a weekly schedule. Data is sourced from BTS monthly releases — to refresh with new data, download the latest monthly CSV from transtats.bts.gov and upload it to the raw S3 bucket.
 
 ---
 
