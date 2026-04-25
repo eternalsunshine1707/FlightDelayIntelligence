@@ -1,0 +1,10 @@
+pandas
+boto3
+awswrangler
+great_expectations
+streamlit
+plotly
+pyathena
+python-dotenv
+dbt-core
+dbt-athena-community
