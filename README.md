@@ -133,25 +133,42 @@ Found and handled 1,342 duplicate rows and 76 delay outliers in the raw BTS data
 ---
 
 ## Pipeline architecture
-BTS Website
-↓
-Python ingestion script → S3 raw bucket
-↓
-AWS Lambda trigger
-↓
-AWS Glue PySpark ETL job
-↓
-S3 processed bucket (CSV)
-↓
-AWS Athena (query engine)
-↓
-dbt models (staging → facts → marts)
-↓
-Streamlit dashboard
-↓
-GitHub Actions (weekly automation)
 
----
+```
+BTS Website (free public data)
+        |
+        v
+Python ingestion script (ingest.py)
+        |
+        v
+S3 raw bucket (flight-delays-raw)
+        |
+        v
+AWS Lambda trigger
+        |
+        v
+AWS Glue PySpark ETL job (glue_etl.py)
+        |
+        v
+S3 processed bucket (flight-delays-processed)
+        |
+        v
+AWS Athena (query engine)
+        |
+        v
+dbt models
+ staging (stg_flights)
+    |
+ facts (fct_delays)
+    |
+ marts (mart_airline_summary, mart_airport_summary)
+        |
+        v
+Streamlit dashboard (app.py)
+        |
+        v
+GitHub Actions (automated weekly pipeline)
+```
 
 ## Why I built this
 
