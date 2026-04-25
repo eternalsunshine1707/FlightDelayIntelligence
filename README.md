@@ -16,10 +16,10 @@ Raw flight data from the BTS website goes through a full pipeline:
 - Cleaned and transformed using Python and Pandas
 - Data quality checks run automatically to catch issues before they reach the dashboard
 - AWS Glue job handles the same transformation at scale using PySpark
-- dbt models build three analytical layers on top of Athena — staging, facts, and aggregated marts
+- dbt models build three analytical layers on top of Athena - staging, facts, and aggregated marts
 - Streamlit dashboard surfaces the insights
 
-The pipeline is automated via GitHub Actions and designed to run on a weekly schedule. Data is sourced from BTS monthly releases — to refresh with new data, download the latest monthly CSV from transtats.bts.gov and upload it to the raw S3 bucket.
+The pipeline is automated via GitHub Actions and designed to run on a weekly schedule. Data is sourced from BTS monthly releases - to refresh with new data, download the latest monthly CSV from transtats.bts.gov and upload it to the raw S3 bucket.
 
 ---
 
@@ -86,7 +86,7 @@ flight-delay-intelligence/
 
 ## Data source
 
-Bureau of Transportation Statistics — Airline On-Time Performance Data
+Bureau of Transportation Statistics - Airline On-Time Performance Data
 https://www.transtats.bts.gov
 
 Free, public, updated monthly. No API key needed.
@@ -125,8 +125,8 @@ The pipeline runs 20 automated checks across 6 categories before any data reache
 - Data type validation
 - Range and boundary checks on delay values
 - Validity checks on airline codes and airport codes
-- Consistency checks — cancelled flights shouldn't have airtime recorded
-- Completeness checks — fill rate and duplicate detection
+- Consistency checks - cancelled flights shouldn't have airtime recorded
+- Completeness checks - fill rate and duplicate detection
 
 Found and handled 1,342 duplicate rows and 76 delay outliers in the raw BTS data.
 
@@ -155,11 +155,11 @@ GitHub Actions (weekly automation)
 
 ## Why I built this
 
-I wanted a project that reflects what data engineering actually looks like at work —
+I wanted a project that reflects what data engineering actually looks like at work -
 messy real-world data, multiple pipeline stages, automated quality checks, and insights
 that actually mean something to real people. Flight delays affect everyone and the patterns
 in the data tell a clear story.
 
-The data had real issues — city names with commas breaking CSV parsing, duplicate records,
+The data had real issues - city names with commas breaking CSV parsing, duplicate records,
 extreme outlier delays that would skew analysis. Handling those problems is what the job is
 actually about.
