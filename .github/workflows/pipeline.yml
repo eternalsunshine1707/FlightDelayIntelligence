@@ -2,8 +2,8 @@ name: Flight Delay Pipeline
 
 on:
   schedule:
-    - cron: '0 8 * * 1'  # runs every Monday at 8am UTC
-  workflow_dispatch:      # allows manual trigger from GitHub
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
 
 jobs:
   run-pipeline:
@@ -15,21 +15,12 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v5
-        with: 
+        with:
           python-version: '3.11'
 
       - name: Install dependencies
         run: |
           pip install pandas boto3 awswrangler python-dotenv
-
-      - name: Run ingestion
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
-          S3_RAW_BUCKET: flight-delays-raw
-          S3_PROCESSED_BUCKET: flight-delays-processed
-        run: python ingest.py
 
       - name: Run transformation
         env:
