@@ -24,10 +24,10 @@ VALID_AIRLINE_CODES = [
 
 def run_quality_checks():
     print("Reading cleaned data from S3...")
-    df = wr.s3.read_parquet(
-        path=f"s3://{PROCESSED_BUCKET}/processed/flights_cleaned/",
-        boto3_session=boto3_session
-    )
+    df = wr.s3.read_csv(
+    path=f"s3://{PROCESSED_BUCKET}/processed/flights_cleaned/flights_cleaned.csv",
+    boto3_session=boto3_session
+)
 
     print(f"Total rows loaded: {len(df):,}")
     checks = []
